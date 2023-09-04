@@ -1,7 +1,18 @@
+'use client'
+import useSWR from 'swr'
 import Link from "next/link";
 import x from '@/styles/app.module.css';
-
+import AppTable from "@/components/app.table";
 export default function Home() {
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const { data, error, isLoading } = useSWR("http://localhost:8000/blogs", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  console.log('data', data);
+
   return (
     <div>
       <ul>
@@ -15,6 +26,7 @@ export default function Home() {
           <Link href="/youtube">Youtube</Link>
         </li>
       </ul>
+      <AppTable />
     </div>
   )
 }
