@@ -12,7 +12,9 @@ export default function Home() {
   });
 
   console.log('data', data);
-
+  if (!data) {
+    return <div>loading ...</div>
+  }
   return (
     <div>
       <ul>
@@ -26,7 +28,7 @@ export default function Home() {
           <Link href="/youtube">Youtube</Link>
         </li>
       </ul>
-      <AppTable />
+      <AppTable blogs={data} />
     </div>
   )
 }
