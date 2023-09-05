@@ -8,14 +8,12 @@ const AppHeader = () => {
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
                 <Navbar.Brand >
-                    <Link href="/">Bảo Anh</Link>
+                    <Link href="/" className='navbar-brand'>Bảo Anh</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link className='nav-link' href="/tiktok">Tiktok</Link>
-                        <Link className='nav-link' href="/youtube">Youtube</Link>
-                        <Link className='nav-link' href="/facebook">Facebook</Link>
+                        <Link className='nav-link' href="/blogs">Blogs</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
