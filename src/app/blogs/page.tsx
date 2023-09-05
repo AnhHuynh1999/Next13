@@ -1,6 +1,7 @@
 'use client'
 import useSWR from 'swr'
 import AppTable from "@/components/app.table";
+
 const BlogsPage = () => {
     const fetcher = (url: string) => fetch(url).then((res) => res.json())
     const { data, error, isLoading } = useSWR("http://localhost:8000/blogs", fetcher, {
@@ -15,7 +16,6 @@ const BlogsPage = () => {
     return (
         <div className='mt-3'>
             <AppTable blogs={data} />
-
         </div>
     )
 }

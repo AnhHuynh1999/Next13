@@ -3,9 +3,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 import CreateModal from './create.modal';
 interface IProps {
-    blogs: IBlog[]
+    blogs: IBlog[] | null
 }
 const AppTable = (props: IProps) => {
     const { blogs } = props;
@@ -17,6 +19,25 @@ const AppTable = (props: IProps) => {
         setBlogSelect(item)
         setShowModalCreate(true)
         setAction('edit')
+    }
+
+    const handleDelete = (id: number) => {
+        if (confirm("Press a button!") == true) {
+            fetch(`http://localhost:8000/blogs/${id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then((res) => res.json()).then((res => {
+                    if (res) {
+                        toast.success('Delete blog succeed')
+                        mutate('http://localhost:8000/blogs')
+                    }
+                }))
+        }
     }
 
     return (
@@ -45,7 +66,7 @@ const AppTable = (props: IProps) => {
                         <td>
                             <Link href={`/blogs/${blog.id}`} className={'btn btn-primary'}>View</Link>
                             <Button variant='warning' className='mx-3' onClick={() => handleEdit(blog)}>Edit</Button>
-                            <Button variant='danger' className='mx-3'>Delete</Button>
+                            <Button variant='danger' className='mx-3' onClick={() => handleDelete(blog.id)}>Delete</Button>
                         </td>
                     </tr>))}
 
