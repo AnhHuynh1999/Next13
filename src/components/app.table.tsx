@@ -25,7 +25,7 @@ const AppTable = (props: IProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {blogs.map(blog => (<tr key={blog.id}>
+                    {blogs?.sort((a, b) => b.id - a.id).map(blog => (<tr key={blog.id}>
                         <td>{blog.id}</td>
                         <td>{blog.title}</td>
                         <td>{blog.author}</td>
